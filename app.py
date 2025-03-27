@@ -65,9 +65,9 @@ def generate_training_report(data, selected_date):
 
     def DB_hit_by_direction (direction):
         Drills = double_barrel[
-            (double_barrel['Drill'] == "25 Targets DB Scored")
+            (double_barrel['Drill'] == "25 Targets scored")
             ]
-        total_count = len(Drills [Drills ['Drill'] == "25 Targets DB Scored"])
+        total_count = len(Drills [Drills ['Drill'] == "25 Targets scored"])
 
         DB_Direction_Data = Drills[
             (Drills['Direction'] == direction)
@@ -146,7 +146,7 @@ def generate_training_report(data, selected_date):
 
     # Generate charts
     st.divider()
-    st.header(selected_athlete + ", on " + selected_date)
+    st.header(selected_athlete + ", on " + str(selected_date))
 
     st.subheader("Double Barrel Accuracy - by barrel")
     st.write("The hit rate for all targets combined was " + str(round(100 * double_barrel_accuracy, 1)) + "%")
@@ -156,17 +156,6 @@ def generate_training_report(data, selected_date):
         horizontal="true"
     )
 
-    st.subheader("Double Barrel Accuracy - by station")
-
-    st.altair_chart(DB_all_station_hits_altair_chart, use_container_width=True)
-
-    st.subheader("Accuracy by Direction in Drill: 25 Targets DB Scored")
-
-    st.altair_chart(DB_all_direction_hits_altair_chart, use_container_width=True)
-
-    st.divider()
-
-
 
     st.subheader("Single Barrel Accuracy")
     st.write(selected_athlete + " hit " + str(round(100 * sb_accuracy, 1)) + "% of Targets.")
@@ -175,6 +164,19 @@ def generate_training_report(data, selected_date):
         color=["#eab464ff", "#dcccbbff"],
         horizontal="true"
     )
+
+    st.divider()
+
+    st.subheader("Double Barrel Accuracy - by station")
+
+    st.altair_chart(DB_all_station_hits_altair_chart, use_container_width=True)
+
+    st.subheader("Accuracy by Direction in Drill: 25 Targets DB Scored")
+
+    st.altair_chart(DB_all_direction_hits_altair_chart, use_container_width=True)
+
+
+
 
 
 # Main application
